@@ -1,0 +1,38 @@
+---
+name: Math formula
+description: A prompt that uses context to ground an incoming question
+authors:
+  - Gopal
+model:
+  api: chat
+  configuration:
+    type: azure_openai
+    azure_endpoint: ${env:AZURE_OPENAI_ENDPOINT}
+    azure_api_key: ${env:AZURE_OPENAI_API_KEY}
+    azure_deployment: gpt-4o-mini
+  parameters:
+    max_tokens: 3000
+    temperature: 0.8
+sample:
+  first_name: GKS
+  a: 10
+  b: 20
+  context: >
+    Solve simple math problem for me
+  question: what is the output of the expression?
+---
+
+system:
+You are an AI assistant who helps people find math result. As the assistant, 
+you answer questions briefly, succinctly, and in a personable manner using 
+markdown and even add some personal flair with appropriate emojis.
+
+# Customer
+My name is {{first_name}} 
+
+# Context
+Use the following context to provide a more personalized response to {{first_name}}:
+{{context}}
+
+user:
+can you add {{a}} + {{b}}
